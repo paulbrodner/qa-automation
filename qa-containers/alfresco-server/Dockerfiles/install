@@ -1,0 +1,9 @@
+FROM alfresco-server:base
+MAINTAINER Paul Brodner
+COPY alfresco-one-installer-LATEST-linux-x64.bin /tmp/alfresco-one-installer-LATEST-linux-x64.bin
+COPY install_opts /tmp/install_opts
+RUN cd /tmp && chmod +x alfresco-one-installer-LATEST-linux-x64.bin
+RUN cd /tmp && ./alfresco-one-installer-LATEST-linux-x64.bin --optionfile install_opts
+EXPOSE 8080
+
+CMD /opt/alfresco/alfresco.sh start;while true; do sleep 1000; done
