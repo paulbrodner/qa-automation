@@ -1,0 +1,14 @@
+FROM alfresco-server:5.1
+MAINTAINER Paul Brodner
+COPY sync.zip /tmp/sync.zip
+RUN unzip /tmp/sync.zip -d /tmp/server
+RUN cp /tmp/server/sync/5x/amps-repository/alfresco-device-sync-repo-2.0-SNAPSHOT.amp /opt/alfresco/amps
+RUN java -jar /opt/alfresco/bin/alfresco-mmt.jar install /opt/alfresco/amps/alfresco-device-sync-repo-2.0-SNAPSHOT.amp /opt/alfresco/tomcat/webapps/alfresco.war
+
+RUN cd /opt/alfresco/tomcat/shared/classes/ && cp alfresco-global.properties alfresco-global.properties.initial
+
+# update global-properties file
+COPY desktop-sync-amp-global.properties /opt/alfresco/tomcat/shared/classes/alfresco-global.properties
+EXPOSE 8080 5532 9090 9093 50500
+
+CMD /opt/alfresco/alfresco.sh start;while true; do sleep 1000; done

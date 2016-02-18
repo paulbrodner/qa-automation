@@ -2,11 +2,12 @@ prefix=/opt/alfresco
 unattendedmodeui=none
 mode=unattended
 debuglevel=0
-enable-components=javaalfresco,postgres,libreofficecomponent,alfrescosolr4,aosmodule,alfrescowcmqs,alfrescogoogledocs
+enable-components=javaalfresco,libreofficecomponent,alfrescosolr4,aosmodule,alfrescowcmqs,alfrescogoogledocs
+disable-components=postgres
 jdbc_database=alfresco
-jdbc_username=alfresco
-jdbc_password=alfresco
-jdbc_url=jdbc:postgresql://localhost/alfresco?useUnicode=yes&characterEncoding=UTF-8
+jdbc_username=docker
+jdbc_password=docker
+jdbc_url=jdbc:postgresql://pg/alfresco?useUnicode=yes&characterEncoding=UTF-8
 jdbc_driver=org.postgresql.Driver
 alfresco_ftp_port=2121
 alfresco_admin_password=admin

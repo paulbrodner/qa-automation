@@ -1,5 +1,0 @@
-FROM sync-service:base
-MAINTAINER Paul Brodner
-COPY sync.zip /tmp/sync.zip
-RUN unzip /tmp/sync.zip -d ~/server
-CMD cd ~/server/sync/service-sync/ && java -jar service-sync-1.1-SNAPSHOT.jar server config.yml;while true; do sleep 1000; done

@@ -1,0 +1,7 @@
+db:
+  image: postgres:9.3
+
+alfresco-server:
+  image: alfresco-server-sync:5.1   
+  links:
+    - db
