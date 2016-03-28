@@ -1,9 +1,16 @@
 FROM alfresco-server:base
 MAINTAINER Paul Brodner
-COPY alfresco-one-installer-LATEST-linux-x64.bin /tmp/alfresco-one-installer-LATEST-linux-x64.bin
-COPY install_opts /tmp/install_opts
-RUN cd /tmp && chmod +x alfresco-one-installer-LATEST-linux-x64.bin
-RUN cd /tmp && ./alfresco-one-installer-LATEST-linux-x64.bin --optionfile install_opts
-EXPOSE 8080
 
+ENV alfresco_version binary/alfresco-one-installer-LATEST-linux-x64.bin
+
+
+# -------------------------------------
+RUN mkdir /kit
+COPY ${alfresco_version} /kit/alfresco.bin
+COPY install_opts /opt/install_opts
+RUN cd /kit && chmod +x alfresco.bin && ./alfresco.bin --optionfile /opt/install_opts && rm -rf /kit/alfresco.bin
+RUN mkdir -p /opt/alfresco/tomcat/classes
+COPY resources/5.1-desktop-sync-amp-global.properties /opt/alfresco/tomcat/shared/classes/alfresco-global.properties
+
+EXPOSE 8080
 CMD /opt/alfresco/alfresco.sh start;while true; do sleep 1000; done

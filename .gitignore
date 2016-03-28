@@ -36,3 +36,7 @@ build/
 .rvmrc
 
 containers/sync-service/*
+
+*.dmg
+
+*.bin
